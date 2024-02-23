@@ -40,18 +40,17 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
      reduceAmount(index){
         if(this.cart[index].amount > 1) {
             this.cart[index].amount--
-            this.save()
         }
+        this.save()
     },
      increaseAmount(index, stock){
         if (this.cart[index].amount < stock) {
             this.cart[index].amount++
-            console.log(index, stock, amount);
-            this.save()
         }
+        this.save()
     },
     deleteAll() {
-        this.cart = []
+        this.cart.length = 0
         this.save()
     },
     getLiked(product) {   
@@ -60,10 +59,10 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
         if(!existingProduct) {
             this.liked.push(product)
         }else {
-            const existingProduct = this.liked.find(toProduct => toProduct.id !== product.id)
-            this.liked = []
-            if(existingProduct) {
-                this.liked.push(existingProduct)
+            const unExistingProduct = this.liked.findIndex(toProduct => toProduct.id === product.id)
+            console.log(unExistingProduct);
+            if(unExistingProduct) {
+                this.liked.splice(unExistingProduct, 1)
             }
         }
         this.saveLiked()
