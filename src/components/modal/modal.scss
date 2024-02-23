@@ -1,0 +1,190 @@
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+
+    &.active {
+        display: block;
+    }
+
+    &__content {
+        min-height: 300px;
+        background: #fefefe;
+        margin: 5% 0 0 auto;
+        // padding: 20px;
+        border: 1px solid #888;
+        max-width: 800px;
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        
+        &-txt {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 15px 0 30px 20px;
+        }
+
+        &-totalPrice {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #eee;
+            padding: 50px 30px;
+            
+            strong {
+                font-size: 18px;
+            }
+
+            &__btn {
+                border: 1px solid #001F3F;
+                padding: 8px 15px;
+                font-size: 18px;
+                font-weight: 700;
+                transition: 0.4s;
+                cursor: pointer;
+                color: #001F3F;
+
+        &:hover {
+            color: #fff;
+            background: #001F3F;
+        }
+            }
+        }
+
+        @media (max-width: 992px) {
+            
+        }
+    }
+    &__close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 15px 20px 0 0;
+
+        &:hover,
+        &:focus {
+            color: #000;
+            cursor: pointer;
+        }
+    }
+
+    &__cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 400px;
+        overflow: auto;
+        padding: 10px 30px;
+        margin-bottom: 20px;
+    }
+
+    &__card {
+        display: flex;
+        align-items: center;
+        background: #f5f5f7;
+        border-radius: 12px;
+        justify-content: space-between;
+        padding: 12px 18px;
+        position: relative;
+        transition: .3s;
+
+        &-productInfo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        &-image {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+
+        &-btn {
+            align-items: center;
+            background: #fff;
+            border-radius: 8px;
+            color: #1d1d1f;
+            display: flex;
+            font-size: 20px;
+            height: 32px;
+            justify-content: center;
+            transition: .3s;
+            width: 32px;
+            margin-left: auto;
+        }
+
+        &-productAmountInfo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-left: auto;
+            margin-right: 18px;
+        }
+
+        &-cancel {
+            border: 1px solid #001F3F;
+            padding: 8px 15px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: 0.4s;
+            cursor: pointer;
+            color: #001F3F;
+
+            &:hover {
+                color: #fff;
+                background: #001F3F;
+            }
+
+            @media (max-width: 576px) {
+                & {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    padding: 0 4px;
+                    background: #f5f5f7;
+                    border: unset;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        &-empty {
+            display: block;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+
+            &-txt {
+                font-size: 36px;
+                text-align: center;
+                margin-bottom: 50px;
+
+                p {
+                    font-size: 20px;
+                }
+            } 
+        }
+
+        @media (max-width: 576px) {
+            & {
+                flex-wrap: wrap;
+                gap: 15px;
+
+                &-productInfo {
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+            }
+        }
+
+    }
+}

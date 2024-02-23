@@ -1,0 +1,22 @@
+.products {
+    padding: 50px 0;
+    background:#749dc5 ;
+
+    &__cards {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+
+        &.grid {
+            grid-template-columns: repeat(auto-fit, minmax(255px, 301.5px));
+            justify-content: start;
+        }
+    }
+
+    &__pagination {
+        display: flex;
+        justify-content: center;
+    }
+}

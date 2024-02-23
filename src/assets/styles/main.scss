@@ -1,0 +1,23 @@
+@import './common.scss';
+
+
+// layouts
+@import '@/layouts/header/header.scss';
+@import '@/layouts/footer/footer.scss';
+// layouts
+
+// views
+@import '@/views/productsView/productsView.scss';
+@import '@/views/categoriesView/categoriesView.scss';
+@import '@/views/singleProductView/singleProductView.scss';
+@import '@/views/likedView/likedView.scss';
+// views
+
+// components
+@import '@/components/card/card.scss';
+@import '@/components/nav/nav.scss';
+@import '@/components/filter/filterProduct.scss';
+@import "vue-awesome-paginate/dist/style.css";
+@import "@/components/skeletonLoader/skeletonLoader.scss";
+@import "@/components/modal/modal.scss";
+// components

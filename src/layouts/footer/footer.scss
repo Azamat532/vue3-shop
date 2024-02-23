@@ -1,0 +1,55 @@
+.footer {
+    padding: 40px 0;
+    background: #001F3F;
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 680px) {
+            & {
+                gap: 30px;
+                flex-wrap: wrap;
+            }
+        }
+
+    }
+    
+    &__logo {
+        font-size: 40px;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    &__txt {
+        font-size: 18px;
+        color: #fff;
+        
+        @media (max-width: 680px) {
+            & {
+                order: 1;
+            }
+        }
+    }
+
+    &__socials {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        &-item {
+            object-fit: cover;
+
+            svg {
+                path {
+                    fill: #fff;
+                    transition: 0.4s;
+
+                    &:hover {
+                        fill: #064787;
+                    }
+                }
+            }
+        }
+    }
+}

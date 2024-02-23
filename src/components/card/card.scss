@@ -1,0 +1,59 @@
+.card {
+    background: #fff;
+    padding: 10px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__image {
+        height: 300px;
+        object-fit: contain;
+        cursor: grab;
+    }
+
+    &__title {
+        font-size: 25px;
+        color: #001F3F;
+        margin-bottom: 10px;
+    }
+
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__price {
+        font-size: 18px;
+        color: #001F3F;
+        &-deleted {
+            text-decoration: line-through;
+        }
+    }
+
+    &__liked {
+        &.liked {
+                g {
+                    path{
+                        fill: #f44336;
+                    }
+                }
+        }
+    }
+
+    &__btn {
+        border: 1px solid #001F3F;
+        padding: 8px 15px;
+        font-size: 18px;
+        font-weight: 700;
+        transition: 0.4s;
+        cursor: pointer;
+        color: #001F3F;
+
+        &:hover {
+            color: #fff;
+            background: #001F3F;
+        }
+    }
+}
