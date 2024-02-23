@@ -66,7 +66,7 @@ await productsStore?.getProducts()
             <Card v-for="item in paginatedProducts"  :key="item.id" :info="item"  />
           <!-- </RouterLink> -->
         </div>
-        <div v-else class="products__cards" :class="{'grid' : paginatedProducts?.length < 4}">
+        <div v-else class="products__cards" :class="{'grid' : filteredProducts?.length < 4}">
           <!-- <RouterLink  :to="'/' + item?.id"> -->
             <Card v-for="item in filteredProducts"  :key="item.id" :info="item"  />
           <!-- </RouterLink> -->
