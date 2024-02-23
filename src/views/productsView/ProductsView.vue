@@ -61,9 +61,14 @@ await productsStore?.getProducts()
     </section>
     <section class="products">
       <div class="container">
-        <div class="products__cards" :class="{'grid' : paginatedProducts?.length < 4}">
+        <div v-if="paginatedProducts != ''" class="products__cards" :class="{'grid' : paginatedProducts?.length < 4}">
           <!-- <RouterLink  :to="'/' + item?.id"> -->
             <Card v-for="item in paginatedProducts"  :key="item.id" :info="item"  />
+          <!-- </RouterLink> -->
+        </div>
+        <div v-else class="products__cards" :class="{'grid' : paginatedProducts?.length < 4}">
+          <!-- <RouterLink  :to="'/' + item?.id"> -->
+            <Card v-for="item in filteredProducts"  :key="item.id" :info="item"  />
           <!-- </RouterLink> -->
         </div>
       </div> 
