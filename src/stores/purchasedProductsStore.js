@@ -58,14 +58,13 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
         const existingProduct = this.liked.find(toProduct => toProduct.id === product.id)
         if(!existingProduct) {
             this.liked.push(product)
+            this.saveLiked()
         }else {
             const unExistingProduct = this.liked.findIndex(toProduct => toProduct.id === product.id)
-            console.log(unExistingProduct);
-            if(unExistingProduct) {
-                this.liked.splice(unExistingProduct, 1)
-            }
+            this.liked.splice(unExistingProduct, 1)
+            this.saveLiked()
         }
-        this.saveLiked()
+        
     },
     save() {
         localStorage.setItem('cart', JSON.stringify(this.cart))
