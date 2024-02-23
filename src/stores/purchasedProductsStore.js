@@ -5,6 +5,7 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
     modalOpened: false,
     cart: JSON.parse(localStorage.getItem('cart')) || [],
     liked: JSON.parse(localStorage.getItem('liked')) || [],
+    purchased: JSON.parse(localStorage.getItem('purchased')) || [],
   }),
   actions: {
     openModal() {
@@ -31,6 +32,24 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
         }else if (!existingProduct?.amount) {
             this.cart.push({...product,amount: 1})
         }
+
+        const existingProduct1 = this.purchased.find(toProduct => toProduct.id === product.id)
+        if(productAmount && !product?.amount && product?.id != existingProduct1?.id) {
+            console.log(productAmount);
+            this.purchased.push({...product,amount: productAmount})
+        }else if(existingProduct1 && existingProduct1.amount < product.stock) {
+            if(+productAmount + +existingProduct1.amount <= existingProduct1?.stock) {
+                console.log(productAmount);
+                existingProduct1.amount = +existingProduct1.amount + +productAmount
+            }else if (+productAmount + +existingProduct1.amount >= existingProduct1?.stock) {
+                existingProduct1.amount = existingProduct1?.stock
+            }else {
+                existingProduct1.amount++
+            }
+            
+        }else if (!existingProduct1?.amount) {
+            this.purchased.push({...product,amount: 1})
+        }
         this.save()
     },
      deleteProduct(index) {
@@ -53,6 +72,10 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
         this.cart.length = 0
         this.save()
     },
+    deletePurchased() {
+        this.purchased.length = 0
+        this.save()
+    },
     getLiked(product) {   
         console.log(product);
         const existingProduct = this.liked.find(toProduct => toProduct.id === product.id)
@@ -68,6 +91,7 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
     },
     save() {
         localStorage.setItem('cart', JSON.stringify(this.cart))
+        localStorage.setItem('purchased', JSON.stringify(this.purchased))
     },
     saveLiked() {
         localStorage.setItem('liked', JSON.stringify(this.liked))

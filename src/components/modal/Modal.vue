@@ -2,11 +2,23 @@
 import {usePurchasedProductsStore} from '@/stores/purchasedProductsStore'
 import { storeToRefs } from 'pinia';
 import { computed} from 'vue'
+import { toast } from 'vue3-toastify';
+import Message from '@/components/message/Message.vue'
 const purchasedProductsStore = usePurchasedProductsStore()
 const { modalOpened, closeModal} = storeToRefs(purchasedProductsStore)
 const totalPrice = computed(() => {
     return purchasedProductsStore?.cart?.reduce((total, product) => total + (Math.floor((product.price - (product.price * product.discountPercentage / 100))) * product.amount), 0)
 })
+
+
+
+const notify = () => {
+  toast(Message, {
+    autoClose: false,
+    onClose: () => purchasedProductsStore.deletePurchased(),
+    position: toast.POSITION.TOP_CENTER,
+  });
+}
 </script>
 <template>
     <div class="modal" :class="{'active' : modalOpened}">
@@ -31,7 +43,7 @@ const totalPrice = computed(() => {
                 </div>
                 <div class="modal__content-totalPrice">
                     <strong >Итоговая цена: {{ totalPrice }}$</strong>
-                    <button @click="purchasedProductsStore?.deleteAll(); modalOpened = false" class="modal__content-totalPrice__btn">Заказ</button>
+                    <button @click="purchasedProductsStore?.deleteAll(); modalOpened = false; notify()" class="modal__content-totalPrice__btn">Заказ</button>
                 </div>
             </div>
             
