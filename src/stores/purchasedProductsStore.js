@@ -54,6 +54,7 @@ export const usePurchasedProductsStore = defineStore('purchasedProducts', {
     },
      deleteProduct(index) {
         this.cart.splice(index, 1)
+        this.purchased.splice(index, 1)
         this.save()
     },
      reduceAmount(index){
