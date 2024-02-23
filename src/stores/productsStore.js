@@ -14,7 +14,6 @@ export const useProductsStore = defineStore('products', {
       try {
         const res = await apiProducts.getAllProducts()
         this.products = res.products
-        console.log(res.products);
         this.allProductsAmount = res.total
       } catch (error) {
         console.error(error.message);

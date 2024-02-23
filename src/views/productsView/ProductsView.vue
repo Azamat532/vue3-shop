@@ -1,8 +1,8 @@
 <script setup>
 import Card from '@/components/card/Card.vue';
 import { useProductsStore } from '@/stores/productsStore';
-
-import { ref, computed } from 'vue';
+import debounce from 'lodash.debounce'
+import { ref, computed, watch } from 'vue';
 const productsStore = useProductsStore()
 const filterOptions = [
   {value: 'arzon', label: 'Подешевле'},
@@ -11,12 +11,16 @@ const filterOptions = [
 const option = ref('')
 const itemsPerPage = 12
 const search = ref('')
+const searched = ref('')
+watch(search, debounce(() => {
+  searched.value = search.value
+}, 1000))
 const filteredProducts =  computed(() => {
   const searchProduct = ref(productsStore?.products)
-  if (search.value.trim() != '') {
+  if (searched.value.trim() != '') {
     
       searchProduct.value = searchProduct?.value?.filter(product =>
-      product.title.toLowerCase().includes(search.value.toLowerCase())
+      product.title.toLowerCase().includes(searched.value.toLowerCase())
       )
     
     }
@@ -27,8 +31,8 @@ const filteredProducts =  computed(() => {
       } else if(option.value == 'qimmat') {
         currentPage.value = 1
       return b?.price - a?.price
-    }
-    return productsStore?.products
+      }
+      return productsStore?.products
     
   })
 })
@@ -62,14 +66,10 @@ await productsStore?.getProducts()
     <section class="products">
       <div class="container">
         <div v-if="paginatedProducts != ''" class="products__cards" :class="{'grid' : paginatedProducts?.length < 4}">
-          <!-- <RouterLink  :to="'/' + item?.id"> -->
             <Card v-for="item in paginatedProducts"  :key="item.id" :info="item"  />
-          <!-- </RouterLink> -->
         </div>
         <div v-else class="products__cards" :class="{'grid' : filteredProducts?.length < 4}">
-          <!-- <RouterLink  :to="'/' + item?.id"> -->
             <Card v-for="item in filteredProducts"  :key="item.id" :info="item"  />
-          <!-- </RouterLink> -->
         </div>
       </div> 
       <div class="products__pagination">
