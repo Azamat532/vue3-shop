@@ -7,7 +7,8 @@ export const useProductsStore = defineStore('products', {
     allProductsAmount: null,
     categories: null,
     productsByCategory: null,
-    currentCategory: null
+    currentCategory: null,
+    totalPages: null
   }),
   actions: {
     async getProducts() {
@@ -15,6 +16,7 @@ export const useProductsStore = defineStore('products', {
         const res = await apiProducts.getAllProducts()
         this.products = res.products
         this.allProductsAmount = res.total
+        this.totalPages = Math.ceil(+res.total / 12)
       } catch (error) {
         console.error(error.message);
       }

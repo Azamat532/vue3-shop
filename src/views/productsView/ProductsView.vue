@@ -1,8 +1,12 @@
 <script setup>
 import Card from '@/components/card/Card.vue';
+import NotFoundPage from '@/pages/NotFoundPage.vue';
 import { useProductsStore } from '@/stores/productsStore';
 import debounce from 'lodash.debounce'
 import { ref, computed, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+const route = useRoute()
+const router = useRouter()
 const productsStore = useProductsStore()
 const filterOptions = [
   {value: 'arzon', label: 'Подешевле'},
@@ -37,16 +41,25 @@ const filteredProducts =  computed(() => {
   })
 })
 
-const currentPage = ref(1)
+const currentPage = ref(+route.query.page > 1 ? +route.query.page : 1)
 
+const onClickHandler = (page) => {
+  // console.log(page, page * 20 - 20);
+    console.log(route.query.page);
+    console.log(page);
+    router.push(`${route.path}?page=${page}`)
+
+  // surahsStore.getSurahSingle(route.params.id, "ar.alafasy, en.transliteration", page * 20 - 20)
+};
 const paginatedProducts = computed(() => {
   const startIndex = (currentPage.value - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage
   return filteredProducts?.value?.slice(startIndex,endIndex)
 })
-const onClickHandler = (page) => {
-  console.log(page);
-};
+
+if(route.query.page > productsStore?.totalPages) {
+  router.push('/error')
+}
 
 await productsStore?.getProducts()
 </script>
